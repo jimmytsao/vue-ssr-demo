@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
   </head>
   <body>
-    <div ng-controller="AppController">
+    <div id="app">
       <h1>Most Starred Vue Repos</h1>
       <list v-bind:repos="repos"></list>
       <button v-on:click="fetchRepos">Load More</button>
