@@ -1,0 +1,10 @@
+<div id="app">
+  <h1>Most Starred Repos on Github</h1>
+  <ol>
+    <li v-for="repo in repos">
+      <p> Stars: {{repo['stargazers_count']}} </p>
+      <a v-bind:href="repo['html_url']">{{repo['full_name']}}</a>
+    </li>
+  </ol>
+  <button v-on:click="loadMore">Load More</button>
+</div>
