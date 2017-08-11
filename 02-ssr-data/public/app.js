@@ -1,3 +1,6 @@
+const Vue = require('vue/dist/vue.common.js')
+const axios = require('axios')
+
 Vue.component('list', {
   template: `
   <ol>
