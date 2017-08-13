@@ -3,31 +3,23 @@
 
 ### Overview
 
-This project is broken up into three separate web applications:
+This project is broken up into two separate web applications:
 
 __Project__ | __Description__
 --- | ---
-`01-client-side` | The web server sends an `index.html` file with every page request. The client fetches and renders the content.
-`02-ssr-data` | The web server inserts a local JS object with the `index.html`. The client renders the page with the pre-fetched data.
-`03-ssr-vue` | The web server renders the Vue application, sending both HTML and state to the client side. The client's state is synced up.
+`01-client-side-rendering` | The web server sends an `index.html` file with every page request. The client fetches and renders the content.
+`02-server-side-rendering` | The web server renders the Vue application, sending both HTML and state to the client side. The client's state is synced up.
 
 ### Local Setup
 
+`npm install`
 
+__Client Side Rendering App__
 
-__Client Side Application__
+1. `npm run csr`
+1. Go to `http://localhost:3000`
 
-1. `npm install`
-1. `npm start`
+__Server Side Rendering App__
 
-__SSR - Data Rendering__
-
-1. `npm install`
-1. `npm start`
-
-__SSR - Vue Rendering__
-
-1. `npm install`
-1. `npm install -g webpack`
-1. `webpack public/js/client-entry.js public/js/bundle.js`
-1. `node server`
+1. `npm run ssr`
+1. Go to `http://localhost:3000`

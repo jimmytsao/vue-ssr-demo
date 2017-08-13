@@ -5,14 +5,25 @@
   "main": "index.js",
   "dependencies": {
     "axios": "^0.16.2",
+    "cross-env": "^5.0.5",
     "express": "^4.15.4",
+    "nodemon": "^1.11.0",
     "vue": "^2.4.2",
     "vue-server-renderer": "^2.4.2",
     "webpack": "^3.5.4"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile-csr": "node_modules/webpack/bin/webpack.js 01-client-side-rendering/public/app.js 01-client-side-rendering/public/app.bundle.js",
+    "compile-ssr": "node_modules/webpack/bin/webpack.js 02-server-side-rendering/public/client.js 02-server-side-rendering/public/client.bundle.js",
+    "csr": "npm run compile-csr && node 01-client-side-rendering/server.js",
+    "ssr": "npm run compile-ssr && node 02-server-side-rendering/server.js",
+    "start": "node index.js",
+    "postinstall": "npm run compile-ssr && npm run compile-csr",
+    "csr-dev": "cross-env PORT=3001 nodemon 01-client-side-rendering/server.js",
+    "ssr-dev": "cross-env PORT=3000 nodemon 02-server-side-rendering/server.js",
+    "csr-watch": "node_modules/webpack/bin/webpack.js 01-client-side-rendering/public/app.js 01-client-side-rendering/public/app.bundle.js --watch",
+    "ssr-watch": "node_modules/webpack/bin/webpack.js 02-server-side-rendering/public/client.js 02-server-side-rendering/public/client.bundle.js --watch"
   },
   "repository": {
     "type": "git",
