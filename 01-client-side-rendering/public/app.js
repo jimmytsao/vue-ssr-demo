@@ -18,7 +18,6 @@ const app = new Vue({
   el: '#app',
   template: `
     <div id="app">
-      <h1>Most Starred Vue Repos</h1>
       <list v-bind:repos="repos"></list>
       <button v-on:click="fetchRepos">Load More</button>
     </div>

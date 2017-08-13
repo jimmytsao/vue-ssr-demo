@@ -27,6 +27,7 @@ app.use((req, res) =>
             <link rel="stylesheet" href="/styles.css" />
           </head>
           <body>
+            <h1>Most Starred Vue Repos</h1>
             ${html}
             <script>
               window.__INITIAL_STATE__=${JSON.stringify(context)}
