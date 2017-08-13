@@ -1,28 +1,44 @@
-const express = require('express');
-const vueServerRenderer = require('vue-server-renderer');
+const express = require('express')
+const path = require('path')
+const app = express()
+const port = process.env.PORT || 3000
+
 const axios = require('axios');
-const fs = require('fs');
-const createApp = require('./public/js/app');
+const vueServerRenderer = require('vue-server-renderer');
+const renderer = vueServerRenderer.createRenderer();
+const createApp = require('./public/app');
 
-const app = express();
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')))
 
-const template = fs.readFileSync('./template.html', 'utf-8');
-const renderer = vueServerRenderer.createRenderer({ template });
-
-app.get('/', (req, res) => {
+app.use((req, res) =>
 
   axios.get('https://api.github.com/search/repositories?q=vue&sort=stars')
-    .then(({ data }) => {
+  .then(({ data }) => {
 
-      const context = { repos: data.items }
-      const app = createApp(context)
+    const context = { repos: data.items }
+    const app = createApp(context)
 
-      renderer.renderToString(app, (error, html) => {
-        res.send(html);
-      })
+    renderer.renderToString(app, (error, html) => {
+      res.send(`
+        <!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <title>VueJS Demo</title>
+            <link rel="stylesheet" href="/styles.css" />
+          </head>
+          <body>
+            ${html}
+            <script>
+              window.__INITIAL_STATE__=${JSON.stringify(context)}
+            </script>
+            <script src="/client.bundle.js"></script>
+          </body>
+        </html>
+      `)
     })
-})
+  })
+)
 
-const port = process.env.PORT || 3000
-app.listen(port, () => console.log(`Ready at http://localhost:${port}`));
+app.listen(port, () =>
+  console.log(`Ready at http://localhost:${port}`)
+)
