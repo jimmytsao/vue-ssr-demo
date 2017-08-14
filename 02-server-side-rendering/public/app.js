@@ -5,7 +5,7 @@ Vue.component('list', {
   template: `
     <ol>
       <li v-for="repo in repos">
-        <p>Stars: {{repo['stargazers_count']}}</p>
+        <p>Stars: {{ repo.stargazers_count }}</p>
         <a v-bind:href="repo.html_url">{{ repo.full_name }}</a>
         <p>{{ repo.description }}</p>
       </li>
